@@ -1,0 +1,46 @@
+.splash-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFFDF7;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.splash-logo {
+  font-size: 40px;
+  font-weight: 700;
+  color: #6EC1E4;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.splash-container {
+  height: 100vh;
+  background-color: #FFFDF7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.splash-logo {
+  font-size: 42px;
+  font-weight: 700;
+  color: #6EC1E4;
+}
+
+.splash-tagline {
+  font-size: 18px;
+  color: #555;
+  margin-top: 10px;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
