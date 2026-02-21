@@ -311,7 +311,7 @@ export default function Home() {
           min-height:100vh; background:var(--off);
           display:flex; align-items:center;
           position:relative; overflow:hidden;
-          padding:20px 0 60px;
+          padding:35px 0 60px;
         }
         /* subtle dot grid */
         .hero::before {
