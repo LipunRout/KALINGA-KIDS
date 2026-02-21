@@ -121,7 +121,7 @@ export default function Navbar() {
           height: 72px;
           transition: height 0.3s ease;
         }
-        .nav-bar.is-scrolled .nav-inner { height: 62px; }
+        
 
         /* ── BRAND ─────────────────────────────────────── */
         .nav-brand {
@@ -141,7 +141,7 @@ export default function Navbar() {
           width: 52px; height: 52px;
           transition: width 0.3s, height 0.3s;
         }
-        .nav-bar.is-scrolled .nav-logo-wrap { width: 44px; height: 44px; }
+        
 
         .nav-logo-ring {
           position: absolute;
@@ -194,7 +194,7 @@ export default function Navbar() {
           transition: font-size 0.3s ease;
           line-height: 1.1;
         }
-        .nav-bar.is-scrolled .nav-school-name { font-size: 17px; }
+        
 
         .nav-tagline {
           font-family: var(--nav-sans);
@@ -292,7 +292,7 @@ export default function Navbar() {
           justify-content: center;
           align-items: center;
           gap: 5px;
-          width: 44px; height: 44px;
+          width: 64px; height: 64px;
           background: var(--nav-off);
           border: 1.5px solid var(--nav-border);
           border-radius: 8px;
@@ -464,9 +464,9 @@ export default function Navbar() {
         }
 
         @media (max-width: 480px) {
-          .nav-inner { padding: 0 18px; height: 62px; }
-          .nav-logo-wrap { width: 44px; height: 44px; }
-          .nav-school-name { font-size: 17px; }
+          .nav-inner { padding: 0 18px; height: 92px; }
+          .nav-logo-wrap { width: 64px; height: 64px; }
+          .nav-school-name { font-size: 27px; }
           .nav-tagline { display: none; }
         }
 

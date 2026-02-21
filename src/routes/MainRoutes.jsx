@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
+import ScrolltoTop from "../components/Scrolltotop";
 
 import Home from "../pages/Home";
 import About from "../pages/About";
@@ -15,6 +16,7 @@ function MainRoutes() {
     <BrowserRouter>
       <Navbar />
 
+      <ScrolltoTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
