@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 // ─────────────────────────────────────────────────────────────
 //  KALINGA KIDS — About Page
@@ -15,7 +16,12 @@ function useReveal(options = {}) {
     const el = ref.current;
     if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); observer.disconnect(); } },
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
       { threshold: 0.15, ...options }
     );
     observer.observe(el);
@@ -30,55 +36,146 @@ function CountUp({ target, suffix = "", duration = 1800 }) {
   const ref = useRef(null);
   const started = useRef(false);
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !started.current) {
-        started.current = true;
-        let s = 0;
-        const step = target / (duration / 16);
-        const t = setInterval(() => {
-          s += step;
-          if (s >= target) { setCount(target); clearInterval(t); }
-          else setCount(Math.floor(s));
-        }, 16);
-      }
-    }, { threshold: 0.5 });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          let s = 0;
+          const step = target / (duration / 16);
+          const t = setInterval(() => {
+            s += step;
+            if (s >= target) {
+              setCount(target);
+              clearInterval(t);
+            } else setCount(Math.floor(s));
+          }, 16);
+        }
+      },
+      { threshold: 0.5 }
+    );
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [target, duration]);
-  return <span ref={ref}>{count}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
 }
 
 const timeline = [
-  { year: "2014", title: "Founded with a Vision",    desc: "Kalinga Kids was established in Kanan Vihar, Patia with a single classroom and a mission to make early learning joyful.", color: "#E8533A" },
-  { year: "2016", title: "Expanded Programmes",      desc: "Introduced structured LKG & UKG curricula with activity-based learning designed by early childhood specialists.", color: "#2B7AB8" },
-  { year: "2019", title: "Award Recognition",         desc: "Recognised as one of Bhubaneswar's leading play schools for excellence in holistic child development.", color: "#2E8B57" },
-  { year: "2022", title: "Campus Upgrade",            desc: "Expanded campus with dedicated music studio, library corner, CCTV-monitored play areas and a nutrition programme.", color: "#D4891A" },
-  { year: "2024", title: "500+ Happy Families",       desc: "Crossed 500 enrolled students, building a thriving community of confident, curious young learners.", color: "#C0392B" },
+  {
+    year: "2014",
+    title: "Founded with a Vision",
+    desc: "Kalinga Kids was established in Kanan Vihar, Patia with a single classroom and a mission to make early learning joyful.",
+    color: "#E8533A",
+  },
+  {
+    year: "2016",
+    title: "Expanded Programmes",
+    desc: "Introduced structured LKG & UKG curricula with activity-based learning designed by early childhood specialists.",
+    color: "#2B7AB8",
+  },
+  {
+    year: "2019",
+    title: "Award Recognition",
+    desc: "Recognised as one of Bhubaneswar's leading play schools for excellence in holistic child development.",
+    color: "#2E8B57",
+  },
+  {
+    year: "2022",
+    title: "Campus Upgrade",
+    desc: "Expanded campus with dedicated music studio, library corner, CCTV-monitored play areas and a nutrition programme.",
+    color: "#D4891A",
+  },
+  {
+    year: "2024",
+    title: "500+ Happy Families",
+    desc: "Crossed 500 enrolled students, building a thriving community of confident, curious young learners.",
+    color: "#C0392B",
+  },
 ];
 
 const values = [
-  { icon: "🎯", title: "Purposeful Play",      desc: "Every activity is intentionally designed to build cognitive, social and physical skills simultaneously.", color: "#E8533A", bg: "rgba(232,83,58,0.06)"  },
-  { icon: "🌱", title: "Holistic Growth",       desc: "We nurture the whole child — mind, body, creativity and emotional intelligence in equal measure.", color: "#2E8B57", bg: "rgba(46,139,87,0.06)"   },
-  { icon: "🔒", title: "Safe & Secure",         desc: "CCTV-monitored campus, trained staff and strict safety protocols so parents can trust completely.", color: "#2B7AB8", bg: "rgba(43,122,184,0.06)"  },
-  { icon: "👩‍🏫", title: "Expert Educators",    desc: "Qualified, experienced teachers who genuinely love working with young children every single day.", color: "#D4891A", bg: "rgba(212,137,26,0.06)"  },
-  { icon: "🤝", title: "Family Partnership",    desc: "We keep parents involved through daily updates, open communication and regular progress sharing.", color: "#C0392B", bg: "rgba(192,57,43,0.06)"   },
-  { icon: "✨", title: "Joy of Learning",       desc: "We believe learning should feel like an adventure — curious, exciting and never a burden.", color: "#9B59B6", bg: "rgba(155,89,182,0.06)"  },
+  {
+    icon: "🎯",
+    title: "Purposeful Play",
+    desc: "Every activity is intentionally designed to build cognitive, social and physical skills simultaneously.",
+    color: "#E8533A",
+    bg: "rgba(232,83,58,0.06)",
+  },
+  {
+    icon: "🌱",
+    title: "Holistic Growth",
+    desc: "We nurture the whole child — mind, body, creativity and emotional intelligence in equal measure.",
+    color: "#2E8B57",
+    bg: "rgba(46,139,87,0.06)",
+  },
+  {
+    icon: "🔒",
+    title: "Safe & Secure",
+    desc: "CCTV-monitored campus, trained staff and strict safety protocols so parents can trust completely.",
+    color: "#2B7AB8",
+    bg: "rgba(43,122,184,0.06)",
+  },
+  {
+    icon: "👩‍🏫",
+    title: "Expert Educators",
+    desc: "Qualified, experienced teachers who genuinely love working with young children every single day.",
+    color: "#D4891A",
+    bg: "rgba(212,137,26,0.06)",
+  },
+  {
+    icon: "🤝",
+    title: "Family Partnership",
+    desc: "We keep parents involved through daily updates, open communication and regular progress sharing.",
+    color: "#C0392B",
+    bg: "rgba(192,57,43,0.06)",
+  },
+  {
+    icon: "✨",
+    title: "Joy of Learning",
+    desc: "We believe learning should feel like an adventure — curious, exciting and never a burden.",
+    color: "#9B59B6",
+    bg: "rgba(155,89,182,0.06)",
+  },
 ];
 
 const team = [
-  { name: "Dr. Niharika K M Sahoo",   role: "Founder & Director",        initial: "SR", color: "#E8533A" },
-  { name: "Mrs. Priya Mohanty", role: "Head of Curriculum",        initial: "PM", color: "#2E8B57" },
-  { name: "Mrs. Reena Das",     role: "Lead Educator — Nursery",   initial: "RD", color: "#2B7AB8" },
-  { name: "Mrs. Anita Sahoo",   role: "Lead Educator — LKG & UKG", initial: "AS", color: "#D4891A" },
+  {
+    name: "Dr. Niharika K M Sahoo",
+    role: "Founder & Director",
+    initial: "SR",
+    color: "#E8533A",
+  },
+  {
+    name: "Mrs. Priya Mohanty",
+    role: "Head of Curriculum",
+    initial: "PM",
+    color: "#2E8B57",
+  },
+  {
+    name: "Mrs. Reena Das",
+    role: "Lead Educator — Nursery",
+    initial: "RD",
+    color: "#2B7AB8",
+  },
+  {
+    name: "Mrs. Anita Sahoo",
+    role: "Lead Educator — LKG & UKG",
+    initial: "AS",
+    color: "#D4891A",
+  },
 ];
 
 export default function About() {
-  const [heroRef,    heroVisible]    = useReveal();
+  const [heroRef, heroVisible] = useReveal();
   const [missionRef, missionVisible] = useReveal();
-  const [valuesRef,  valuesVisible]  = useReveal();
-  const [timelineRef,timelineVisible]= useReveal();
-  const [teamRef,    teamVisible]    = useReveal();
-  const [ctaRef,     ctaVisible]     = useReveal();
+  const [valuesRef, valuesVisible] = useReveal();
+  const [timelineRef, timelineVisible] = useReveal();
+  const [teamRef, teamVisible] = useReveal();
+  const [ctaRef, ctaVisible] = useReveal();
 
   return (
     <>
@@ -611,28 +708,63 @@ export default function About() {
       `}</style>
 
       <div className="ab-page">
-
         {/* ══════════ 1. HERO ══════════ */}
         <section className="ab-hero">
           <div className="ab-hero-inner" ref={heroRef}>
             <div>
               <div className={`ab-reveal ${heroVisible ? "ab-visible" : ""}`}>
                 <div className="ab-hero-tag">
-                  <span className="ab-hero-dot" /> Established 2014
+                  <span className="ab-hero-dot" /> Established 2012
                 </div>
               </div>
-              <h1 className={`ab-h1 ab-reveal ab-d1 ${heroVisible ? "ab-visible" : ""}`}>
-                The School That<br />
-                <em style={{ fontStyle:"italic", color:"var(--ab-orange)" }}>Cares Like Home</em>
+              <h1
+                className={`ab-h1 ab-reveal ab-d1 ${
+                  heroVisible ? "ab-visible" : ""
+                }`}
+              >
+                The School That
+                <br />
+                <em style={{ fontStyle: "italic", color: "var(--ab-orange)" }}>
+                  Cares Like Home
+                </em>
               </h1>
-              <div className={`ab-hero-divider ab-reveal ab-d2 ${heroVisible ? "ab-visible" : ""}`} />
-              <p className={`ab-lead ab-reveal ab-d2 ${heroVisible ? "ab-visible" : ""}`} style={{ maxWidth:500 }}>
-                Since 2014, Kalinga Kids Play School has been nurturing young minds in Patia, Bhubaneswar —
-                creating a safe, joyful and structured environment where every child thrives.
+              <div
+                className={`ab-hero-divider ab-reveal ab-d2 ${
+                  heroVisible ? "ab-visible" : ""
+                }`}
+              />
+              <p
+                className={`ab-lead ab-reveal ab-d2 ${
+                  heroVisible ? "ab-visible" : ""
+                }`}
+                style={{ maxWidth: 500 }}
+              >
+                Since 2012, Kalinga Kids Play School has been nurturing young
+                minds in Patia, Bhubaneswar — creating a safe, joyful and
+                structured environment where every child thrives.
               </p>
-              <div className={`ab-reveal ab-d3 ${heroVisible ? "ab-visible" : ""}`} style={{ display:"flex", gap:16, flexWrap:"wrap", marginTop:36 }}>
-                <a href="/admission" className="ab-btn-primary">Apply for Admission →</a>
-                <a href="/contact"   className="ab-btn-outline" style={{ color:"var(--ab-navy)", borderColor:"rgba(26,58,92,0.3)" }}>Contact Us</a>
+              <div
+                className={`ab-reveal ab-d3 ${heroVisible ? "ab-visible" : ""}`}
+                style={{
+                  display: "flex",
+                  gap: 16,
+                  flexWrap: "wrap",
+                  marginTop: 36,
+                }}
+              >
+                <Link to="/admission" className="ab-btn-primary">
+                  Apply for Admission →
+                </Link>
+                <Link
+                  to="/contact"
+                  className="ab-btn-outline"
+                  style={{
+                    color: "var(--ab-navy)",
+                    borderColor: "rgba(26,58,92,0.3)",
+                  }}
+                >
+                  Contact Us
+                </Link>
               </div>
             </div>
 
@@ -646,12 +778,17 @@ export default function About() {
               />
               <div className="ab-float-card ab-fc-1">
                 <div className="ab-fc-label">Founded</div>
-                <div className="ab-fc-value">2014</div>
+                <div className="ab-fc-value">2012</div>
                 <div className="ab-fc-sub">A decade of trust</div>
               </div>
               <div className="ab-float-card ab-fc-2">
                 <div className="ab-fc-label">Students</div>
-                <div className="ab-fc-value" style={{ color:"var(--ab-green)" }}>500+</div>
+                <div
+                  className="ab-fc-value"
+                  style={{ color: "var(--ab-green)" }}
+                >
+                  500+
+                </div>
                 <div className="ab-fc-sub">Happy families</div>
               </div>
             </div>
@@ -679,7 +816,9 @@ export default function About() {
         {/* ══════════ 3. MISSION ══════════ */}
         <section className="ab-mission" ref={missionRef}>
           <div className="ab-mission-inner">
-            <div className={`ab-reveal-left ${missionVisible ? "ab-visible" : ""}`}>
+            <div
+              className={`ab-reveal-left ${missionVisible ? "ab-visible" : ""}`}
+            >
               <div className="ab-mission-img-wrap">
                 <img
                   src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=700&q=80"
@@ -688,28 +827,65 @@ export default function About() {
                 />
                 <div className="ab-mission-badge">
                   <div className="ab-mb-num">10+</div>
-                  <div className="ab-mb-text">Years of<br />Excellence</div>
+                  <div className="ab-mb-text">
+                    Years of
+                    <br />
+                    Excellence
+                  </div>
                 </div>
               </div>
             </div>
 
             <div>
-              <div className={`ab-eyebrow ab-reveal ab-d1 ${missionVisible ? "ab-visible" : ""}`}>Our Mission</div>
-              <h2 className={`ab-h2 ab-reveal ab-d1 ${missionVisible ? "ab-visible" : ""}`} style={{ marginBottom:0 }}>
-                Education That<br />
-                <em style={{ fontStyle:"italic", color:"var(--ab-sky)" }}>Feels Natural</em>
+              <div
+                className={`ab-eyebrow ab-reveal ab-d1 ${
+                  missionVisible ? "ab-visible" : ""
+                }`}
+              >
+                Our Mission
+              </div>
+              <h2
+                className={`ab-h2 ab-reveal ab-d1 ${
+                  missionVisible ? "ab-visible" : ""
+                }`}
+                style={{ marginBottom: 0 }}
+              >
+                Education That
+                <br />
+                <em style={{ fontStyle: "italic", color: "var(--ab-sky)" }}>
+                  Feels Natural
+                </em>
               </h2>
-              <blockquote className={`ab-pull-quote ab-reveal ab-d2 ${missionVisible ? "ab-visible" : ""}`}>
-                "Every child deserves love, patience and encouragement — just like home."
+              <blockquote
+                className={`ab-pull-quote ab-reveal ab-d2 ${
+                  missionVisible ? "ab-visible" : ""
+                }`}
+              >
+                "Every child deserves love, patience and encouragement — just
+                like home."
               </blockquote>
-              <p className={`ab-body ab-reveal ab-d3 ${missionVisible ? "ab-visible" : ""}`}>
-                Located in <strong style={{ color:"var(--ab-navy)" }}>Kanan Vihar Phase-II, Patia, Bhubaneswar</strong>,
-                we have spent over a decade refining an activity-based curriculum that treats each child as an individual —
-                celebrating their unique pace, learning style and personality.
+              <p
+                className={`ab-body ab-reveal ab-d3 ${
+                  missionVisible ? "ab-visible" : ""
+                }`}
+              >
+                Located in{" "}
+                <strong style={{ color: "var(--ab-navy)" }}>
+                  Kanan Vihar Phase-II, Patia, Bhubaneswar
+                </strong>
+                , we have spent over a decade refining an activity-based
+                curriculum that treats each child as an individual — celebrating
+                their unique pace, learning style and personality.
               </p>
-              <p className={`ab-body ab-reveal ab-d4 ${missionVisible ? "ab-visible" : ""}`} style={{ marginTop:14 }}>
-                We partner closely with families, keeping parents informed and involved every step of the way —
-                because we believe great outcomes happen when school and home work together.
+              <p
+                className={`ab-body ab-reveal ab-d4 ${
+                  missionVisible ? "ab-visible" : ""
+                }`}
+                style={{ marginTop: 14 }}
+              >
+                We partner closely with families, keeping parents informed and
+                involved every step of the way — because we believe great
+                outcomes happen when school and home work together.
               </p>
             </div>
           </div>
@@ -796,22 +972,32 @@ export default function About() {
         {/* ══════════ 6. TEAM ══════════ */}
         <section className="ab-team" ref={teamRef}>
           <div className="ab-team-inner">
-            <div className={`ab-reveal ${teamVisible ? "ab-visible" : ""}`} style={{ textAlign:"center" }}>
-              <div className="ab-eyebrow" style={{ justifyContent:"center" }}>The People Behind It</div>
+            <div
+              className={`ab-reveal ${teamVisible ? "ab-visible" : ""}`}
+              style={{ textAlign: "center" }}
+            >
+              <div className="ab-eyebrow" style={{ justifyContent: "center" }}>
+                The People Behind It
+              </div>
               <h2 className="ab-h2">
-                Meet Our<br />
-                <em style={{ fontStyle:"italic", color:"var(--ab-sky)" }}>Dedicated Educators</em>
+                Meet Our
+                <br />
+                <em style={{ fontStyle: "italic", color: "var(--ab-sky)" }}>
+                  Dedicated Educators
+                </em>
               </h2>
             </div>
             <div className="ab-team-grid">
               {team.map((m, i) => (
                 <div
                   key={i}
-                  className={`ab-team-card ab-reveal ab-d${i+1} ${teamVisible ? "ab-visible" : ""}`}
+                  className={`ab-team-card ab-reveal ab-d${i + 1} ${
+                    teamVisible ? "ab-visible" : ""
+                  }`}
                 >
                   <div
                     className="ab-team-avatar"
-                    style={{ background:m.color, "--ab-ring":m.color }}
+                    style={{ background: m.color, "--ab-ring": m.color }}
                   >
                     {m.initial}
                   </div>
@@ -828,21 +1014,27 @@ export default function About() {
           <div className="ab-cta-inner">
             <div className={`ab-reveal ${ctaVisible ? "ab-visible" : ""}`}>
               <h2 className="ab-cta-h">
-                Ready to Join the<br />
-                <em style={{ fontStyle:"italic", color:"var(--ab-orange)" }}>Kalinga Family?</em>
+                Ready to Join the
+                <br />
+                <em style={{ fontStyle: "italic", color: "var(--ab-orange)" }}>
+                  Kalinga Family?
+                </em>
               </h2>
               <p className="ab-cta-sub">
-                Admissions for 2025–26 are now open. Secure your child's place in
-                Bhubaneswar's most nurturing play school today.
+                Admissions for 2025–26 are now open. Secure your child's place
+                in Bhubaneswar's most nurturing play school today.
               </p>
               <div className="ab-cta-btns">
-                <a href="/admission" className="ab-btn-primary">Apply for Admission →</a>
-                <a href="/contact"   className="ab-btn-outline">Schedule a Visit</a>
+                <Link to="/admission" className="ab-btn-primary">
+                  Apply for Admission →
+                </Link>
+                <Link to="/contact" className="ab-btn-outline">
+                  Schedule a Visit
+                </Link>
               </div>
             </div>
           </div>
         </section>
-
       </div>
     </>
   );

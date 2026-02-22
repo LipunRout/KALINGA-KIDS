@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import AdmissionForm from "../components/AdmissionForm";
+import { Link } from "react-router-dom";
+import Gallery from "./Gallery";
 
 // ─────────────────────────────────────────────────────────────
 //  KALINGA KIDS  ·  Professional Edition
@@ -196,7 +198,6 @@ export default function Home() {
     child: "",
     program: "",
   });
-  
 
   useEffect(() => {
     const t = setInterval(
@@ -728,12 +729,12 @@ export default function Home() {
                 and emotionally.
               </p>
               <div className="d-flex flex-wrap gap-3 mt-4 fu d3">
-                <a href="/admission" className="btn-dk">
+                <Link to="/admission" className="btn-dk">
                   Apply for Admission →
-                </a>
-                <a href="#about" className="btn-ol">
+                </Link>
+                <Link to="/about" className="btn-ol">
                   Learn About Us
-                </a>
+                </Link>
               </div>
               <div className="hero-micro-stats fu d4">
                 <div className="hms-item">
@@ -942,7 +943,8 @@ export default function Home() {
       </section>
 
       {/* ══════════ GALLERY ══════════ */}
-      <section className="kk-sec" style={{ background: "white" }}>
+      <Gallery />
+      {/* <section className="kk-sec" style={{ background: "white" }}>
         <div className="kk-wrap">
           <div className="gal-header">
             <div>
@@ -978,7 +980,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ══════════ FACILITIES ══════════ */}
       <section className="kk-sec" style={{ background: "var(--off)" }}>
