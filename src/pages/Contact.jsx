@@ -57,8 +57,7 @@ const INFO_CARDS = [
 ];
 
 const TEAM = [
-  { name: "Jyothsna Ma'am", role: "Admissions Coordinator", color: "#E8533A", initial: "JM", phone: "7008844395" },
-  { name: "Sunita Ma'am",   role: "Director & Principal",   color: "#2E8B57", initial: "SM", phone: "7008844395" },
+  { name: "Coordinator", role: "Admissions Coordinator", color: "#E8533A", initial: "AC", phone: "7008844395" },
 ];
 
 export default function Contact() {
@@ -578,10 +577,10 @@ export default function Contact() {
               {/* quick contact tiles — desktop */}
               <div className={`ct-hero-right ct-right cd1 ${heroVis?"in":""}`}>
                 {[
-                  { icon:"📞", bg:"rgba(43,122,184,0.15)",  label:"Call Us",   value:"+91 70088 44395",        href:"tel:7008844395" },
-                  { icon:"✉",  bg:"rgba(46,139,87,0.15)",   label:"Email",     value:"Kalingakidss@gmail.com", href:"mailto:Kalingakidss@gmail.com" },
-                  { icon:"📍", bg:"rgba(232,83,58,0.15)",   label:"Address",   value:"Kanan Vihar Ph-II, Patia, BBSR", href:"https://maps.google.com/?q=Kanan+Vihar+Phase+II+Patia+Bhubaneswar" },
-                  { icon:"🕐", bg:"rgba(212,137,26,0.15)",  label:"Open Mon–Sat", value:"8:00 AM – 1:00 PM",  href:null },
+                  { icon:"📞", bg:"rgba(43,122,184,0.15)",  label:"Call Us",      value:"+91 70088 44395",        href:"tel:7008844395" },
+                  { icon:"✉",  bg:"rgba(46,139,87,0.15)",   label:"Email",        value:"Kalingakidss@gmail.com", href:"mailto:Kalingakidss@gmail.com" },
+                  { icon:"📍", bg:"rgba(232,83,58,0.15)",   label:"Address",      value:"Kanan Vihar Ph-II, Patia, BBSR", href:"https://maps.google.com/?q=Kanan+Vihar+Phase+II+Patia+Bhubaneswar" },
+                  { icon:"🕐", bg:"rgba(212,137,26,0.15)",  label:"Open Mon–Sat", value:"8:00 AM – 1:00 PM",      href:null },
                 ].map((q, i) => (
                   q.href
                     ? <a key={i} className="ct-qc" href={q.href} target={q.href.startsWith("http")?"_blank":undefined} rel="noopener noreferrer">
@@ -614,9 +613,12 @@ export default function Contact() {
                     {c.lines.map((l, j) => <div key={j} className="ct-ic-line">{l}</div>)}
                   </div>
                   {c.action && (
-                    <a href={c.action.href} target={c.action.href.startsWith("http")?"_blank":undefined}
+                    <a
+                      href={c.action.href}
+                      target={c.action.href.startsWith("http")?"_blank":undefined}
                       rel="noopener noreferrer"
-                      className="ct-ic-action" style={{color:c.color}}
+                      className="ct-ic-action"
+                      style={{color:c.color}}
                     >
                       {c.action.label}
                     </a>
@@ -632,7 +634,7 @@ export default function Contact() {
           <div className="ct-wrap">
             <div className="ct-main-grid">
 
-              {/* LEFT — form + team */}
+              {/* ── LEFT COL — form + team ── */}
               <div className={`ct-left-col ct-left ${mainVis?"in":""}`}>
 
                 {/* form */}
@@ -672,7 +674,26 @@ export default function Contact() {
                   </div>
                 </div>
 
-              {/* RIGHT — map + social */}
+                {/* team */}
+                <div className="ct-team-card">
+                  <div className="ct-team-label">Direct Contacts</div>
+                  <div className="ct-team-list">
+                    {TEAM.map((t, i) => (
+                      <div key={i} className="ct-team-item">
+                        <div className="ct-team-avatar" style={{background:t.color}}>{t.initial}</div>
+                        <div>
+                          <div className="ct-team-name">{t.name}</div>
+                          <div className="ct-team-role">{t.role}</div>
+                        </div>
+                        <a href={`tel:${t.phone}`} className="ct-team-call">📞</a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>{/* ── END ct-left-col ── */}
+
+              {/* ── RIGHT COL — map + social ── */}
               <div className={`ct-right-col ct-right cd1 ${mainVis?"in":""}`}>
 
                 {/* Google Maps embed */}
@@ -712,12 +733,13 @@ export default function Contact() {
                   </div>
                 </div>
 
-              </div>
-            </div>
-          </div>
-        </section>
+              </div>{/* ── END ct-right-col ── */}
 
-      </div>
+            </div>{/* ── END ct-main-grid ── */}
+          </div>{/* ── END ct-wrap ── */}
+        </section>{/* ── END ct-main ── */}
+
+      </div>{/* ── END ct-page ── */}
     </>
   );
 }
