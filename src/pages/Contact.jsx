@@ -672,24 +672,6 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* team */}
-                <div className="ct-team-card">
-                  <div className="ct-team-label">Speak Directly With</div>
-                  <div className="ct-team-list">
-                    {TEAM.map((t, i) => (
-                      <div className="ct-team-item" key={i}>
-                        <div className="ct-team-avatar" style={{background:t.color}}>{t.initial}</div>
-                        <div>
-                          <div className="ct-team-name">{t.name}</div>
-                          <div className="ct-team-role">{t.role}</div>
-                        </div>
-                        <a href={`tel:${t.phone}`} className="ct-team-call" title={`Call ${t.name}`}>📞</a>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
               {/* RIGHT — map + social */}
               <div className={`ct-right-col ct-right cd1 ${mainVis?"in":""}`}>
 
